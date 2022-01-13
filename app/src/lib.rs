@@ -2,6 +2,7 @@ mod utils;
 
 use wasm_bindgen::prelude::*;
 use rxrust::prelude::*;
+use std::time::Duration;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -17,8 +18,9 @@ extern {
 #[wasm_bindgen]
 pub fn greet() {
     use web_sys::console;
+    use rxrust::scheduler::LocalSpawner;
 
-    observable::from_iter(0..100)
+    observable::timer("aString", Duration::from_secs(1), LocalSpawner)
       .take(5)
-      .subscribe(|n| console::log_2(&"Logging items emitted from observable ".into(), &n.into()));
+      .subscribe(|s| console::log_2(&"Logging items emitted from observable ".into(), &s.into()));
 }

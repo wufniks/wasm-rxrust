@@ -1,0 +1,3 @@
+[submodule "rxRust"]
+	path = rxRust
+	url = git@github.com:wufniks/rxRust.git
