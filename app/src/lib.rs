@@ -20,7 +20,7 @@ pub fn greet() {
     use web_sys::console;
     use rxrust::scheduler::LocalSpawner;
 
-    observable::timer("aString", Duration::from_secs(1), LocalSpawner)
+    observable::js_interval(Duration::from_secs(1))
       .take(5)
-      .subscribe(|s| console::log_2(&"Logging items emitted from observable ".into(), &s.into()));
+      .subscribe(|n| console::log_2(&"Logging items emitted from observable ".into(), &n.into()));
 }
