@@ -1,8 +1,8 @@
 mod utils;
 
-use wasm_bindgen::prelude::*;
 use rxrust::prelude::*;
 use std::time::Duration;
+use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -11,16 +11,16 @@ use std::time::Duration;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-extern {
+extern "C" {
     fn alert(s: &str);
 }
 
 #[wasm_bindgen]
 pub fn greet() {
-    use web_sys::console;
     use rxrust::scheduler::LocalSpawner;
+    use web_sys::console;
 
     observable::interval(Duration::from_secs(1), LocalSpawner)
-      .take(5)
-      .subscribe(|n| console::log_2(&"Logging items emitted from observable ".into(), &n.into()));
+        .take(5)
+        .subscribe(|n| console::log_2(&"Logging items emitted from observable ".into(), &n.into()));
 }
