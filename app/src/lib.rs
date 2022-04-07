@@ -24,3 +24,14 @@ pub fn greet() {
       .take(5)
       .subscribe(|n| console::log_2(&"Logging items emitted from observable ".into(), &n.into()));
 }
+
+#[wasm_bindgen]
+pub fn greet2() {
+    use web_sys::console;
+  console::log_1(&"Hello world".into());
+}
+
+#[wasm_bindgen]
+pub fn greet3() -> Result<(), JsValue> {
+  Err(JsValue::from("Raising exception"))
+}
